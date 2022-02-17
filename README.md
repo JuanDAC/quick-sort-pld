@@ -30,37 +30,29 @@ void quick_sort(int *array, size_t size);
 
 ```c
 
-void swap(int *array, int x, int y)
-{
-    int temp = array[x];
-    array[x] = array[y];
-    array[y] = temp;
-}
-
 void quick_sort(int *array, size_t size)
 {
-    int change = 0, moving = 0, pivot = size - 1, new_size = 0;
+  int change = 0, moving = 0, pivot = size - 1;
 
-    if (size == 0)
-        return;
+  if (size <= 1)
+    return;
 
-    while (true)
-    {
-        if (array[moving] >= array[pivot])
-            break;
-        moving++;
-    }
+  while (true)
+  {
+    if (array[moving] >= array[pivot])
+      break;
+    moving++;
+  }
 
-    for (change = moving; moving <= pivot; moving++)
-        if (array[pivot] >= array[moving])
-            swap(array, change, moving),
-                change++;
+  for (change = moving; moving <= pivot; moving++)
+    if (array[pivot] >= array[moving])
+      swap(array, change, moving),
+        change++;
 
-    swap(array, change, moving - 1);
+  swap(array, change, moving - 1);
 
-    new_size = change - 1;
-    quick_sort(array, new_size);
-    quick_sort(array + change + 1, size - new_size);
+  quick_sort(array, change - 1);
+  quick_sort(array + change + 1, size - change - 1);
 }
 
 ```
